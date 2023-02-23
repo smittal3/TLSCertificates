@@ -77,14 +77,14 @@ def initiate_pipeline(log):
 
   # Run ZGrab on both zmap lists to get cert chains
   log.write("\nEVENT: Cisco Umbrella Zgrab\n")
-  process6 = subprocess.run(['zgrab', "--port" , "443", '--tls', '--output-file=../Umbrella/Zgrab/{}.json'.format(yesterday), "--input-file=../Umbrella/Zmap/{}.csv".format(yesterday)], stdout=PIPE, stderr=PIPE)
+  process6 = subprocess.run(['~/go/src/github.com/zmap/zgrab2/zgrab2', "--port" , "443", '--tls', '--output-file=../Umbrella/Zgrab/{}.json'.format(yesterday), "--input-file=../Umbrella/Zmap/{}.csv".format(yesterday)], stdout=PIPE, stderr=PIPE)
   log.write("Stdout: \n")
   log.write(process6.stdout.decode("utf-8") + "\n")
   log.write("Stderr: \n")
   log.write(process6.stderr.decode('utf-8') + "\n")
   
   log.write("\nEVENT: Majestic Zgrab\n")
-  process7 = subprocess.run(['zgrab', "--port" , "443", '--tls', '--output-file=../Majestic/Zgrab/{}.json'.format(yesterday), "--input-file=../Majestic/Zmap/{}.csv".format(yesterday)], stdout=PIPE, stderr=PIPE)
+  process7 = subprocess.run(['~/go/src/github.com/zmap/zgrab2/zgrab2', "--port" , "443", '--tls', '--output-file=../Majestic/Zgrab/{}.json'.format(yesterday), "--input-file=../Majestic/Zmap/{}.csv".format(yesterday)], stdout=PIPE, stderr=PIPE)
   log.write("Stdout: \n")
   log.write(process7.stdout.decode("utf-8") + "\n")
   log.write("Stderr: \n")
