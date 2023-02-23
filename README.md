@@ -34,3 +34,4 @@ Packages:
 6. apt install python3 
 7. apt install python-pip3
 8. pip3 install dnspython
+9. apt install unzip
