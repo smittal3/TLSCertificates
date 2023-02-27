@@ -1,3 +1,4 @@
+import os
 import filecmp
 import subprocess
 from subprocess import Popen, PIPE
@@ -6,7 +7,7 @@ from datetime import date, timedelta, datetime
 # Connect whole repo to a github repo for backup
 def initiate_pipeline(log):
   start = datetime.now()
-
+  os.system("touch ../logs/started.txt")
   yesterday = date.today() - timedelta(days = 1)
   dayBefore = date.today() - timedelta(days = 2)
   yesterday = datetime.strftime(yesterday, '%m_%d_%y')
