@@ -61,14 +61,14 @@ def initiate_pipeline(log):
   # Run Zmap on both IP lists to get reduced IP list 
   # Need to modify zmap Bandwith option
   log.write("\nEVENT: Cisco Umbrella Zmap\n")
-  process4 = subprocess.run(['zmap', "-B" , "20M", '-p', '443', "-o", "../Umbrella/Zmap/{}.csv".format(yesterday), '--whitelist-file=../Umbrella/DNS/{}.csv'.format(yesterday)], stdout=PIPE, stderr=PIPE)
+  process4 = subprocess.run(['sudo', 'zmap', "-B" , "20M", '-p', '443', "-o", "../Umbrella/Zmap/{}.csv".format(yesterday), '--whitelist-file=../Umbrella/DNS/{}.csv'.format(yesterday)], stdout=PIPE, stderr=PIPE)
   log.write("Stdout: \n")
   log.write(process4.stdout.decode("utf-8") + "\n")
   log.write("Stderr: \n")
   log.write(process4.stderr.decode('utf-8') + "\n")
   
   log.write("\nEVENT: Majestic Zmap\n")
-  process5 = subprocess.run(['zmap', "-B" , "20M", '-p', '443', "-o", "../Majestic/Zmap/{}.csv".format(yesterday), '--whitelist-file=../Majestic/DNS/{}.csv'.format(yesterday)], stdout=PIPE, stderr=PIPE)
+  process5 = subprocess.run(['sudo', 'zmap', "-B" , "20M", '-p', '443', "-o", "../Majestic/Zmap/{}.csv".format(yesterday), '--whitelist-file=../Majestic/DNS/{}.csv'.format(yesterday)], stdout=PIPE, stderr=PIPE)
   log.write("Stdout: \n")
   log.write(process5.stdout.decode("utf-8") + "\n")
   log.write("Stderr: \n")
@@ -77,14 +77,14 @@ def initiate_pipeline(log):
 
   # Run ZGrab on both zmap lists to get cert chains
   log.write("\nEVENT: Cisco Umbrella Zgrab\n")
-  process6 = subprocess.run(['/home/ubuntu/go/src/github.com/zmap/zgrab2/zgrab2', "--port" , "443", '--tls', '--output-file=../Umbrella/Zgrab/{}.json'.format(yesterday), "--input-file=../Umbrella/Zmap/{}.csv".format(yesterday)], stdout=PIPE, stderr=PIPE)
+  process6 = subprocess.run(['sudo', '/home/ubuntu/go/src/github.com/zmap/zgrab2/zgrab2', 'tls', '--output-file=../Umbrella/Zgrab/{}.json'.format(yesterday), "--input-file=../Umbrella/Zmap/{}.csv".format(yesterday)], stdout=PIPE, stderr=PIPE)
   log.write("Stdout: \n")
   log.write(process6.stdout.decode("utf-8") + "\n")
   log.write("Stderr: \n")
   log.write(process6.stderr.decode('utf-8') + "\n")
   
   log.write("\nEVENT: Majestic Zgrab\n")
-  process7 = subprocess.run(['/home/ubuntu/go/src/github.com/zmap/zgrab2/zgrab2', "--port" , "443", '--tls', '--output-file=../Majestic/Zgrab/{}.json'.format(yesterday), "--input-file=../Majestic/Zmap/{}.csv".format(yesterday)], stdout=PIPE, stderr=PIPE)
+  process7 = subprocess.run(['sudo', '/home/ubuntu/go/src/github.com/zmap/zgrab2/zgrab2', 'tls', '--output-file=../Majestic/Zgrab/{}.json'.format(yesterday), "--input-file=../Majestic/Zmap/{}.csv".format(yesterday)], stdout=PIPE, stderr=PIPE)
   log.write("Stdout: \n")
   log.write(process7.stdout.decode("utf-8") + "\n")
   log.write("Stderr: \n")
